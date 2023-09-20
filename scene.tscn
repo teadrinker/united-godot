@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://3q23c7na2i65"]
+
+[ext_resource type="Script" path="res://UnitedGodot/UGGameObject.cs" id="1_iog8n"]
+[ext_resource type="Script" path="res://UnitedGodotProject/UnitedGodotTest.cs" id="2_k763q"]
+[ext_resource type="Script" path="res://UnitedGodotProject/AutoRotate.cs" id="3_pdnvi"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.70574)
+
+[node name="GameObject" type="Node3D" parent="."]
+script = ExtResource("1_iog8n")
+
+[node name="UnitedGodotTest" type="Node" parent="GameObject"]
+script = ExtResource("2_k763q")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.546853, -0.221476, 0, 0.221476, 0.546853, 0, 0, 0, 0.59, 1.61668, 0, 0)
+
+[node name="AutoRotate" type="Node" parent="CSGBox3D"]
+script = ExtResource("3_pdnvi")
+rotationSpeed = 45.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.364397, 2.20907, 2.5008)
