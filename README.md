@@ -40,7 +40,7 @@ Classes / structs and their Godot mapping, see details in the [source](UnitedGod
 
 ### Shader
 
-The basic shader set-up is using three files per shader
+The basic shader set-up is [using](UnitedGodotProject/Resources/BasicShader.shader) [three](UnitedGodotProject/Resources/BasicShader.gdshader) [files](UnitedGodotProject/Resources/BasicShader.gdshaderinc) per shader
 
     .shader      - Unity template (+config of culling/blending etc)
     .gdshader    - Godot template (+config of culling/blending etc)
