@@ -57,7 +57,8 @@ The basic shader set-up is [using](UnitedGodotProject/Resources/BasicShader.shad
  * Making even a semi-complete Unity API adapter
 
 ## Problems & Misc Chaotic Notes
- 
+
+ * For Unity-style scripts to work, they need to use `partial` class
  * Only the functionality inside UnitedGodotTest.cs was tested, and not much more was implemented
  * I don't know why I have to flip the uv coords on Godot
  * There's probably unnecessary overhead using the Godot spatial pbr shading system to render plain unlit stuff (at least the fog seems to always on), but I did not find any alternative
