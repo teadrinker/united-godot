@@ -4,15 +4,15 @@ This is **an experiment** / POC, aimed at C# development
 that can build with either Unity or Godot.
 
 The repo contains a Godot project.
-The folder `UnitedGodotProject` contains Unity-compatible scripts:
+The folder [UnitedGodotProject](UnitedGodotProject) contains Unity-compatible scripts:
 
-    AutoRotate.cs - very simple
-    UnitedGodotTest.cs - More advanced...
+ - [AutoRotate.cs](UnitedGodotProject/AutoRotate.cs) - very simple
+ - [UnitedGodotTest.cs](UnitedGodotProject/UnitedGodotTest.cs) - More advanced...
     
 To try in Unity, copy `UnitedGodot` / `UnitedGodotProject` folders into Assets,
-and attach scripts in `UnitedGodotProject` to GameObjects...
+and attach [UnitedGodotTest.cs](UnitedGodotProject/UnitedGodotTest.cs) to a GameObject...
 
-### Background
+## Background
 
  * Relying on Unity is becoming increasingly untenable
  * I mostly need Unity for cross-platform/hardware support
@@ -20,20 +20,20 @@ and attach scripts in `UnitedGodotProject` to GameObjects...
  * It's probably faster to port a small subset of Unity to Godot, than to port all my code...
 
 
-### Mapped functionality
+## Mapped functionality
 
-Classes / structs and their Godot mapping
+Classes / structs and their Godot mapping, see details [here](UnitedGodot/UnitedGodot.cs)
 
- * MonoBehaviour  - inherits from Godot.Node
- * GameObject     - has a reference to a Godot.Node3D or UnitedGodot.UGGameObject
- * Mesh           - creates/owns a Godot.ArrayMesh
- * MeshFilter     - has a (nullable) reference to a Mesh
- * MeshRenderer   - creates/owns a Godot.MeshInstance3D
- * Vector3        - owns Godot.Vector3 (same for vec2/vec4/color)
- * Resources.Load - calls Godot.GD.Load
- * Material       - Godot.ShaderMaterial
- * Shader         - Godot.Shader
- * Texture2D      - Godot.Texture2D
+    MonoBehaviour  - inherits from Godot.Node
+    GameObject     - has a reference to a Godot.Node3D or UnitedGodot.UGGameObject
+    Mesh           - creates/owns a Godot.ArrayMesh
+    MeshFilter     - has a (nullable) reference to a Mesh
+    MeshRenderer   - creates/owns a Godot.MeshInstance3D
+    Vector3        - owns Godot.Vector3 (same for vec2/vec4/color)
+    Resources.Load - calls Godot.GD.Load
+    Material       - Godot.ShaderMaterial
+    Shader         - Godot.Shader
+    Texture2D      - Godot.Texture2D
 
 ### Shader
 
@@ -43,7 +43,7 @@ The basic shader set-up is using three files per shader
     .gdshader    - Godot template (+config of culling/blending etc)
     .gdshaderinc - The main (shared) shader code
 
-### Problems & Misc Notes
+## Problems & Misc Notes
  
  * I don't know why I have to flip the uv coords on Godot
  * Only the functionality inside UnitedGodotTest.cs was tested, and not much more was implemented
