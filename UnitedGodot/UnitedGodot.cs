@@ -1,6 +1,6 @@
 //  ------ United Godot ------ 
 //  teadrinker / Martin Eklund
-//  Licence: MIT 
+//  License: MIT 
 
 #if UNITY_2017_1_OR_NEWER
  
