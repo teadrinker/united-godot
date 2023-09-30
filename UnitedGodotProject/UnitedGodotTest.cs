@@ -12,6 +12,7 @@ public partial class UnitedGodotTest : MonoBehaviour
 	{
 		Texture2D tex = Resources.Load<Texture2D>("Texture");
 		Shader shader = Resources.Load<Shader>("BasicShader");
+		Mesh mesh = Resources.Load<Mesh>("Dodeca");
 		var material = new Material(shader);
 		material.SetTexture("_Texture2", tex);
 		material.mainTexture = tex;		
@@ -20,10 +21,16 @@ public partial class UnitedGodotTest : MonoBehaviour
 
 		var child = new GameObject("Child");
 		var handedness = UnitedGodot.Global.isGodot ? -1f : 1f;		
-		child.AddComponent<AutoRotate>().rotationSpeed = -90f * handedness;
+		child.AddComponent<AutoRotate>().rotationSpeedY = -90f * handedness;
 		var childSize = Vector3.one * 0.25f;
 		GenerateBoxMeshForGameObject(child, size / 2f + childSize / 2f, childSize, material, singleTriangle);
 		child.transform.SetParent(transform);
+
+		var dodecaHedron = new GameObject("dodecaHedron");
+		dodecaHedron.AddComponent<MeshFilter>().sharedMesh = mesh;
+		dodecaHedron.AddComponent<MeshRenderer>().sharedMaterial = material;
+		dodecaHedron.transform.SetParent(transform);
+		dodecaHedron.transform.localPosition = new Vector3(0, -1.3f, 0);
 	}
 
 	static void GenerateBoxMeshForGameObject(GameObject go, Vector3 pos, Vector3 size, Material material, bool singleTriangle)

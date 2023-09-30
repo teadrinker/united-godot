@@ -20,7 +20,6 @@ transform = Transform3D(0.546853, -0.221476, 0, 0.221476, 0.546853, 0, 0, 0, 0.5
 
 [node name="AutoRotate" type="Node" parent="CSGBox3D"]
 script = ExtResource("3_pdnvi")
-rotationSpeed = 45.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.364397, 2.20907, 2.5008)

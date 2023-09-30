@@ -15,18 +15,18 @@ namespace Godot
 		LocaleId=32,LocalizableString=33,NodeType=34,HideQuaternionEdit=35,Password=36,LayersAvoidance=37,Max=38
 	}
 
-    [System.AttributeUsage(System.AttributeTargets.Property | System.AttributeTargets.Field)]
-    public sealed class ExportAttribute : System.Attribute
-    {
-        public ExportAttribute(PropertyHint hint = PropertyHint.None, string hintString = "") {		
+	[System.AttributeUsage(System.AttributeTargets.Property | System.AttributeTargets.Field)]
+	public sealed class ExportAttribute : System.Attribute
+	{
+		public ExportAttribute(PropertyHint hint = PropertyHint.None, string hintString = "") {		
 			_hint = hint;
 			_hintString = hintString;
 		}
 		private PropertyHint _hint;
 		private string _hintString;
-        public PropertyHint Hint { get { return _hint; } }
-        public string HintString { get { return _hintString; } }
-    }
+		public PropertyHint Hint { get { return _hint; } }
+		public string HintString { get { return _hintString; } }
+	}
 
 }
 
@@ -64,6 +64,7 @@ namespace UnityEngine
 	partial class Resources { 
 		public static string UnitedGodotResourceRoot = "res://UnitedGodotProject/Resources/"; 
 		public static string UnitedGodotTextureExtension = ".jpg"; 
+		public static string UnitedGodotMeshExtension = ".obj"; 
 	}
 
 
@@ -339,7 +340,7 @@ namespace UnityEngine
 		public void SetVector (string name, Vector4 value) { godot.SetShaderParameter(name, value.godot); }
 	}
 	
-	public class Mesh {
+	public class Mesh : Object {
 		public int[] triangles {
 			set {                                           _meshArrays[(int)Godot.Mesh.ArrayType.Index] = value; }
 			get { return (int[])_meshArrays[(int)Godot.Mesh.ArrayType.Index]; }
@@ -358,9 +359,21 @@ namespace UnityEngine
 			_meshArrays = new Godot.Collections.Array();
 			_meshArrays.Resize((int)Godot.Mesh.ArrayType.Max);
 		}
-		public ArrayMesh GetGodotMesh() {
+		
+		public void SetGodotMesh(Godot.Mesh m) {
+			if(m == null) {
+				Debug.LogWarning("SetGodotMesh() mesh reference was null... ignored");
+				return;
+			}
+			_godotMesh = m;
+			Valid = true;
+		}
+			
+		public Godot.Mesh GetGodotMesh() {
 			if(!Valid) {
-				_godot.AddSurfaceFromArrays(Godot.Mesh.PrimitiveType.Triangles, _meshArrays);		
+				_godot.AddSurfaceFromArrays(Godot.Mesh.PrimitiveType.Triangles, _meshArrays);	
+				_godotMesh = _godot;
+				
 				/*
 				var vertices = new Godot.Vector3[]
 				{
@@ -382,10 +395,12 @@ namespace UnityEngine
 				// Create the Mesh.
 				arrMesh.AddSurfaceFromArrays(Godot.Mesh.PrimitiveType.Triangles, arrays);
 				_godot = arrMesh;
-				*/					
+				_godotMesh = _godot;				
+				*/	
+								
 				Valid = true;
 			}
-			return _godot;			
+			return _godotMesh;			
 		}
 		public void RecalculateNormals() {
 			Debug.LogError("Mesh.RecalculateNormals not implemented!");
@@ -393,6 +408,7 @@ namespace UnityEngine
 		}	
 		private Godot.Collections.Array _meshArrays;
 		private ArrayMesh _godot;
+		private Godot.Mesh _godotMesh;
 		private bool Valid = false;
 	}
 	
@@ -402,7 +418,13 @@ namespace UnityEngine
 	
 	public static partial class Resources {
 		public static T Load<T>(string name) where T: Object {
-			if(typeof(T) == typeof(Texture2D))
+			if(typeof(T) == typeof(Mesh))
+			{
+				var m = new Mesh();
+				m.SetGodotMesh(GD.Load<Godot.Mesh>(UnitedGodotResourceRoot + name + UnitedGodotMeshExtension));
+				return (T) (Object) m;
+			}
+			else if(typeof(T) == typeof(Texture2D))
 				return (T) (Object) new Texture2D() { godot = GD.Load<Godot.Texture2D>(UnitedGodotResourceRoot + name + UnitedGodotTextureExtension) };
 			else if(typeof(T) == typeof(Shader)) {
 				var shader = GD.Load<Godot.Shader>(UnitedGodotResourceRoot + name + ".gdshader");
