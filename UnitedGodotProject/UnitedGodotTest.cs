@@ -8,11 +8,13 @@ public partial class UnitedGodotTest : MonoBehaviour
 	[Godot.Export][Range(0,1)] public float scaling = 0.5f;
 	/*[Godot.Export]*/ public Vector4 shaderParams = Vector4.one;
 
+	private string _path = "UnitedGodotTest/";
+
 	public void Start()
 	{
-		Texture2D tex = Resources.Load<Texture2D>("Texture");
-		Shader shader = Resources.Load<Shader>("BasicShader");
-		Mesh mesh = Resources.Load<Mesh>("Dodeca");
+		Texture2D tex = Resources.Load<Texture2D>(_path+"Texture");
+		Shader shader = Resources.Load<Shader>(_path+"BasicShader");
+		Mesh mesh = Resources.Load<Mesh>(_path+"Dodeca");
 		var material = new Material(shader);
 		material.SetTexture("_Texture2", tex);
 		material.mainTexture = tex;		

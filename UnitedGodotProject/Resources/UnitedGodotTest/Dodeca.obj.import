@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://da1p2klym4opv"
+path="res://.godot/imported/Dodeca.obj-582fb3bfe6d11cc17e85cba0c62e086a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Dodeca.obj-582fb3bfe6d11cc17e85cba0c62e086a.mesh"]
+
+source_file="res://UnitedGodotProject/Resources/UnitedGodotTest/Dodeca.obj"
+dest_files=["res://.godot/imported/Dodeca.obj-582fb3bfe6d11cc17e85cba0c62e086a.mesh", "res://.godot/imported/Dodeca.obj-582fb3bfe6d11cc17e85cba0c62e086a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
